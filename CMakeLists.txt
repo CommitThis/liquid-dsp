@@ -78,7 +78,14 @@ set(liquid_SOURCES
 add_library(liquid OBJECT ${liquid_SOURCES})
 target_link_libraries(liquid m)
 target_compile_options(liquid PRIVATE -Wall -Wno-deprecated-declarations -Wno-unused-variable)
-target_include_directories(liquid PRIVATE . include)
+target_include_directories(liquid 
+    PUBLIC
+        $<INSTALL_INTERFACE:/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    PRIVATE 
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+    )
 
 # Link the fec library if available
 if(HAVE_LIBFEC)
@@ -97,6 +104,10 @@ target_link_libraries(liquid-shared liquid)
 # Create static lib
 add_library(liquid-static STATIC)
 target_link_libraries(liquid-static liquid)
+
+
+add_library(liquid::liquid-shared ALIAS liquid-shared)
+add_library(liquid::liquid-static ALIAS liquid-static)
 
 # Configure shared and static lib properties
 set_target_properties(liquid-shared liquid-static PROPERTIES
