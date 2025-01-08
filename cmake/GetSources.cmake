@@ -162,6 +162,8 @@ set(framing_SOURCES
   src/framing/src/bpacketgen.c
   src/framing/src/bpacketsync.c
   src/framing/src/detector_cccf.c
+  src/framing/src/dsssframe64gen.c
+  src/framing/src/dsssframe64sync.c
   src/framing/src/dsssframegen.c
   src/framing/src/dsssframesync.c
   src/framing/src/flexframegen.c
@@ -215,8 +217,6 @@ set(matrix_SOURCES
 # MODULE - modem
 set(modem_SOURCES
     src/modem/src/ampmodem.c
-    src/modem/src/cpfskdem.c
-    src/modem/src/cpfskmod.c
     src/modem/src/fskdem.c
     src/modem/src/fskmod.c
     src/modem/src/gmskdem.c
